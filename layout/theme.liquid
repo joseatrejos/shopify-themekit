@@ -1,0 +1,106 @@
+<!doctype html>
+<html class="no-js supports-no-cookies" lang="{{ shop.locale }}">
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="theme-color" content="{{ settings.color_accent }}">
+    <link rel="canonical" href="{{ canonical_url }}">
+
+    <!-- Bootstrap,  & Fonts' Style -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700,700i,600,600i">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Serif+Pro">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://cdn.shopify.com/s/files/1/0452/7344/8600/files/Customizable-Background--Overlay.css?v=1597519759">
+    <link rel="stylesheet" href="https://cdn.shopify.com/s/files/1/0452/7344/8600/files/Footer-Dark.css?v=1597519759">
+    <link rel="stylesheet" href="https://cdn.shopify.com/s/files/1/0452/7344/8600/files/Highlight-Clean_51134d6e-3259-4944-bb3b-f12375310297.css?v=1597519759">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.2.0/aos.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.css">
+    <link rel="stylesheet" href="https://cdn.shopify.com/s/files/1/0452/7344/8600/files/Pretty-Carousel-Fade--TouchSwipe.css?v=1597519759">
+    <link rel="stylesheet" href="https://cdn.shopify.com/s/files/1/0452/7344/8600/files/smoothproducts.css?v=1597519759">
+
+    <!-- Favicon -->
+    {%- if settings.favicon != blank -%}
+    <link rel="shortcut icon" href="{{ settings.favicon | img_url: '32x32' }}" type="image/png">
+    {%- endif -%}
+
+    <!-- SEO -->
+    {%- capture seo_title -%}
+    {{ page_title }}
+    {%- if current_tags -%}
+    {%- assign meta_tags = current_tags | join: ', ' -%} &ndash; {{ 'general.meta.tags' | t: tags: meta_tags -}}
+    {%- endif -%}
+    {%- if current_page != 1 -%}
+    &ndash; {{ 'general.meta.page' | t: page: current_page }}
+    {%- endif -%}
+    {%- assign escaped_page_title = page_title | escape -%}
+    {%- unless escaped_page_title contains shop.name -%}
+    &ndash; {{ shop.name }}
+    {%- endunless -%}
+    {%- endcapture -%}
+    <title>{{ seo_title | strip }}</title>
+
+    {%- if page_description -%}
+    <meta name="description" content="{{ page_description | escape }}">
+    {%- endif -%}
+
+    {% include 'social-meta-tags' %}
+
+    <!-- Default Themekit CSS ? -->
+    {% include 'css-variables' %}
+
+    <!-- Shop money Format and Cart -->
+    <script>
+      document.documentElement.className = document.documentElement.className.replace('no-js', '');
+
+      window.theme = {
+        strings: {
+          addToCart: {{ 'products.product.add_to_cart' | t | json }},
+          soldOut: { { 'products.product.sold_out' | t | json } },
+          unavailable: { { 'products.product.unavailable' | t | json } }
+        },
+        moneyFormat: { { shop.money_format | json } }
+      };
+    </script>
+
+    {{ content_for_header }}
+    
+    {{ 'app.css' | asset_url | stylesheet_tag }}
+  </head>
+
+  <body id="{{ page_title | handle }}" class="template-{{ template.name | handle }}">
+
+    <a class="in-page-link sr-only" href="#MainContent">{{ 'general.accessibility.skip_to_content' | t }}</a>
+
+    <!-- Bootstrap Navbar -->
+    {% section 'header' %}
+
+    <!-- Index's Dynamic UI Content -->
+    <main>
+      {{ content_for_layout }}
+    </main>
+
+    <!-- Bootstrap Footer -->
+    {% section 'footer' %}
+s
+    {{ 'app.js' | asset_url | script_tag }}
+
+    <!-- Javascript Files -->
+    <script src="https://cdn.shopify.com/s/files/1/0452/7344/8600/files/Theme.js?v=1597491209"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <script src="https://cdn.shopify.com/s/files/1/0452/7344/8600/files/bs-init.js?v=1597519786"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.2.0/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.js"></script>
+    <script src="https://cdn.shopify.com/s/files/1/0452/7344/8600/files/Pretty-Carousel-Fade--TouchSwipe.js?v=1597519786"></script>
+    <script src="https://cdn.shopify.com/s/files/1/0452/7344/8600/files/smoothproducts.min.js?v=1597519786"></script>
+    <script src="https://cdn.shopify.com/s/files/1/0452/7344/8600/files/theme.js?v=1597519786"></script>
+  </body>
+
+</html>
