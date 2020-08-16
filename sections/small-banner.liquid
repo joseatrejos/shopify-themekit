@@ -1,0 +1,34 @@
+<section style="margin-top: 72px; margin-bottom: 50px;">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12" style="text-align: center;">
+        <hr>
+        <p data-aos="fade" data-aos-once="true" style="font-size: 20px;">
+          {%- if section.settings.title != blank -%}
+            <i class="fas fa-shipping-fast"></i> {{ section.settings.title | escape }}
+          {%- endif -%}
+        </p>
+        <hr>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Schemas define the content type (as well as its labels and default message) that the user will be able to see in the shopify admin app -->
+{% schema %}
+  {
+    "name": "Small Banner",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "Talk about your brand's shipping to your customers"
+      }
+    ],
+    "presets": [{
+        "name": "Rich text",
+        "category": "Text"
+    }]
+  }
+{% endschema %}

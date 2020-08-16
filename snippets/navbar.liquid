@@ -1,66 +1,43 @@
-          <ul class="navbar-nav mr-auto">
-              {% for link in linklists[section.settings.menu].links %}
-                {% if link.links != blank %}
-                  <li class="nav-item dropdown">
-                    <a href="{{ link.url }}" class="nav-link dropdown-toggle" href="#" role="button"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      {{ link.title }}
-                     
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                      {% for childlink in link.links %}
-                          <a href="{{ childlink.url }}" class="dropdown-item">
-                            {{ childlink.title }}
-                          </a>
-                      {% endfor %}
-                    </div>
-                  </li>
-                {% else %}
-                  <li  class="nav-item">
-                    <a href="{{ link.url }}" class="nav-link">
-                      {{ link.title }}
-                    </a> 
-                  </li>
-                {% endif %}
-              {% endfor %}
-            </ul>
-
 <nav class="navbar navbar-light navbar-expand-lg fixed-top bg-white">
   <div class="container"><a class="navbar-brand logo" href="/" style="font-family: 'Source Serif Pro', serif;">PoolMex</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse" id="navcol-1">
           <ul class="nav navbar-nav ml-auto">
-            <li class="nav-item" role="presentation"><a class="nav-link" href="index.html" style="margin-right: 10px;color: rgb(0,0,0,0.75);">Inicio</a></li>
+            {% for link in linklists[section.settings.menu].links %}
 
-            <!-- Products' Dropdown -->
-            <li class="nav-item dropdown">
-              <a class="dropdown-toggle nav-link menu_links" data-toggle="dropdown" aria-expanded="false" style="margin-right: 10px;color: rgb(0,0,0,0.75);border-color: rgba(0,0,0,0);">Productos</a>
-              <div class="dropdown-menu" role="menu">
-                <a class="dropdown-item" role="presentation" href="#">Albercas Estructurales</a>
-                <a class="dropdown-item" role="presentation" href="#">Albercas Inflables<br></a>
-                <a class="dropdown-item" role="presentation" href="#">Bombas</a>
-              </div>
-            </li>
-            <li class="nav-item" role="presentation">
-              <a class="nav-link" href="promos.html" style="margin-right: 10px;color: rgb(0,0,0,0.75);">
-                Promociones
-              </a>
-            </li>
-            <li class="nav-item" role="presentation">
-              <a class="nav-link" href="contact.html" style="margin-right: 10px;color: rgb(0,0,0,0.75);">
-                Contacto
-              </a>
-            </li>
-            <li class="nav-item" role="presentation">
-              <a class="nav-link" href="us.html" style="margin-right: 10px;color: rgb(0,0,0,0.75);">
-                Nosotros
-              </a>
-            </li>
+              {% if link.links != "#" %}
+                <!-- Non-dropdown Navbar Links -->
+                <li class="nav-item" role="presentation">
+                  <a class="nav-link" href="{{ link.url }}" style="margin-right: 10px;color: rgb(0,0,0,0.75);">
+                    {{ link.title }}
+                  </a>
+                  </li>
+                </li>
+
+              {% else %}
+                <!-- Products' Dropdown -->
+                <li class="nav-item dropdown">
+                  <a class="dropdown-toggle nav-link menu_links" data-toggle="dropdown" aria-expanded="false" style="margin-right: 10px;color: rgb(0,0,0,0.75);border-color: rgba(0,0,0,0);">Productos</a>
+                  <div class="dropdown-menu" role="menu">
+                    {% for childlink in link.links %}
+                      <a class="dropdown-item" role="presentation" href="{{ childlink.url }}">
+                        {{ childlink.title }}
+                      </a>
+                    {% endfor %}
+                  </div>
+                </li>
+
+              {% endif %}
+
+            {% endfor %}
+
             <!-- Shopping Cart -->
             <li class="nav-item" role="presentation">
-              <a class="nav-link" href="index.html">
+              <a class="nav-link" href="{{ routes.cart_url }}">
                 <i class="fas fa-shopping-cart" style="color: rgba(24,169,231,0.9);"></i>
               </a>
             </li>
           </ul>
+
         </div>
     </div>
 </nav>

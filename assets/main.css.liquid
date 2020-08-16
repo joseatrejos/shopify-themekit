@@ -1,0 +1,91 @@
+/* CSS to change the link's appearance */
+
+.anone{color:inherit;}
+.anone:link{text-decoration:none;}
+.anone:visited{color:inherit;}
+.anone:hover{text-decoration:none; color:inherit;}
+.anone:active{color:inherit;}
+
+/*---------------------------------------------------
+CSS responsive breakpoints' media queries  */
+
+/* Extra Large */
+@media only screen and (min-width: 1200px) {
+    .responsiveVideo{
+        height:100%;
+    }
+    .prueba{
+        color:red;
+        font-size: 80px;
+    }
+}
+
+/* Large */
+@media only screen and (min-width: 992px) and (max-width: 1199px)  {
+    .responsiveVideo{
+        height:100%;
+    }
+    .prueba{
+        color:red;
+        font-size: 80px;
+    }
+}
+
+/* Medium */
+@media only screen and (min-width: 768px ) and (max-width: 991px)  {
+    .responsiveVideo{
+        height:100%;
+    }
+    .prueba{
+        color:red;
+        font-size: 45px;
+    }
+}
+
+/* Small */
+@media only screen and (min-width: 576px) and (max-width: 767px) { 
+    .responsiveVideo{
+        height:100%;
+    }
+}
+
+/* Extra Small */
+@media only screen and (max-width: 575px) {
+    .responsiveVideo{
+        height:100%;
+    }
+}
+
+/*----------------------------------------------------
+Multimedia Animations */
+.NameOfYourClass {
+    animation: NameOfYourAnimation 20s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes NameOfYourAnimation {
+    0% {opacity:0;}
+    7% {opacity:0;}
+    10.5% {opacity:1;}
+    19% {opacity:1;}
+    22.5% {opacity:0;}
+    100% {opacity:0;}
+}
+
+/*------------------------------------------------------
+Image Background Cover CSS                                 */
+
+.image-cover-example {
+    background: url(images/bg.jpg) no-repeat center center fixed; 
+   -webkit-background-size: cover;
+   -moz-background-size: cover;
+   -o-background-size: cover;
+   background-size: cover;
+}
+
+/*--------------------------------------------------------------
+CSS Automatic and Perfect Scrolling */
+
+html {
+    scroll-behavior: smooth;
+}

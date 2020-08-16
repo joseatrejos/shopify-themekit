@@ -15,14 +15,17 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Serif+Pro">
 
-    <!-- CSS -->
-    <link rel="stylesheet" href="https://cdn.shopify.com/s/files/1/0452/7344/8600/files/Customizable-Background--Overlay.css?v=1597519759">
-    <link rel="stylesheet" href="https://cdn.shopify.com/s/files/1/0452/7344/8600/files/Footer-Dark.css?v=1597519759">
-    <link rel="stylesheet" href="https://cdn.shopify.com/s/files/1/0452/7344/8600/files/Highlight-Clean_51134d6e-3259-4944-bb3b-f12375310297.css?v=1597519759">
+    <!-- CSS styles -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.2.0/aos.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.css">
-    <link rel="stylesheet" href="https://cdn.shopify.com/s/files/1/0452/7344/8600/files/Pretty-Carousel-Fade--TouchSwipe.css?v=1597519759">
-    <link rel="stylesheet" href="https://cdn.shopify.com/s/files/1/0452/7344/8600/files/smoothproducts.css?v=1597519759">
+
+    <!-- To reference CSS that has been uploaded throught the terminal (with theme watch), their file extension must be .css.liquid  and use this format -->
+    <link rel="stylesheet" href="{{ 'main.css' | asset_url }}">
+    <link rel="stylesheet" href="{{ 'Background-Overlay.css' | asset_url }}">
+    <link rel="stylesheet" href="{{ 'Footer-Dark.css' | asset_url }}">
+    <link rel="stylesheet" href="{{ 'Highlight-Clean.css' | asset_url }}">
+    <link rel="stylesheet" href="{{ 'Pretty-Carousel.css' | asset_url }}">
+    <link rel="stylesheet" href="{{ 'smoothproducts.css' | asset_url }}">
 
     <!-- Favicon -->
     {%- if settings.favicon != blank -%}
@@ -69,38 +72,42 @@
     </script>
 
     {{ content_for_header }}
-    
-    {{ 'app.css' | asset_url | stylesheet_tag }}
   </head>
 
   <body id="{{ page_title | handle }}" class="template-{{ template.name | handle }}">
 
     <a class="in-page-link sr-only" href="#MainContent">{{ 'general.accessibility.skip_to_content' | t }}</a>
 
-    <!-- Bootstrap Navbar -->
+    <!-- Bootstrap Navbar, to modify head to "Snippets\navbar.liquid" -->
     {% section 'header' %}
+    
+    <!-- Index's Dynamic UI Content, to modify, head to shopify's customization of your store and edit it from the web app -->
+    <main style="margin-top:120px;">
+      
+      <!-- Container class (non-fluid) for rows and columns -->
+      <div class="container">
+        {{ content_for_layout }}
+      </div>
 
-    <!-- Index's Dynamic UI Content -->
-    <main>
-      {{ content_for_layout }}
     </main>
+    
+    <!-- The (free shipping) Small Banner Section -->
+    {% section 'small-banner' %}
 
     <!-- Bootstrap Footer -->
     {% section 'footer' %}
-s
-    {{ 'app.js' | asset_url | script_tag }}
 
     <!-- Javascript Files -->
-    <script src="https://cdn.shopify.com/s/files/1/0452/7344/8600/files/Theme.js?v=1597491209"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
-    <script src="https://cdn.shopify.com/s/files/1/0452/7344/8600/files/bs-init.js?v=1597519786"></script>
+    <script src="{{ 'bs-init.js' | asset_url }}"></script>
+    <script src="{{ 'bs-init.js' | asset_url }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.2.0/aos.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.js"></script>
-    <script src="https://cdn.shopify.com/s/files/1/0452/7344/8600/files/Pretty-Carousel-Fade--TouchSwipe.js?v=1597519786"></script>
-    <script src="https://cdn.shopify.com/s/files/1/0452/7344/8600/files/smoothproducts.min.js?v=1597519786"></script>
-    <script src="https://cdn.shopify.com/s/files/1/0452/7344/8600/files/theme.js?v=1597519786"></script>
+    <script src="{{ 'Pretty-Carousel.js' | asset_url }}"></script>
+    <script src="{{ 'smoothproducts.js' | asset_url }}"></script>
+    <script src="{{ 'theme.js' | asset_url }}"></script>
   </body>
 
 </html>
