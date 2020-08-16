@@ -1,6 +1,7 @@
+<!-- Start: Footer Dark -->
 <footer>
   <div class="container">
-        
+
       {%- assign social_accounts = 'Facebook, Twitter, Pinterest, Instagram, Snapchat, Tumblr, YouTube, Vimeo,' | split: ', ' -%}
       <ul>
         {% for social in social_accounts %}
@@ -46,7 +47,49 @@
         <small>{{ 'layout.footer.copyright' | t }} &copy; {{ 'now' | date: "%Y" }}, {{ shop.name | link_to: '/' }}. {{ powered_by_link }}</small>
       </div>
   </div>
+
+  <div class="footer-dark">
+    <h2 data-aos="fade" data-aos-duration="700" data-aos-delay="50" data-aos-once="true" style="text-align: center;font-size: 25px;color: rgb(0,0,0);">Poolmex</h2>
+    <footer>
+      <div class="container">
+        <div class="row">
+
+          <!-- Services -->
+          <div class="col-sm-6 col-md-6 item" data-aos="fade" data-aos-duration="700" data-aos-delay="200"
+            data-aos-once="true">
+            <h3 style="margin-top: 15px;color: rgb(0,0,0);">Acerca de</h3>
+            <ul>
+              <li><a href="#Privacy" style="color: rgb(28,28,28);" data-toggle="modal">Privacidad</a></li>
+              <li><a href="contact.html" style="color: rgb(28,28,28);">Contacto</a></li>
+              <li><a href="#FAQ" style="color: rgb(28,28,28);" data-toggle="modal">Preguentas Frecuentes</a></li>
+            </ul>
+          </div>
+
+          <!-- Footer Text -->
+          <div class="col-md-6 item text" data-aos="fade" data-aos-duration="700" data-aos-delay="350" data-aos-once="true">
+            <h3 style="margin-top: 15px;color: rgb(0,0,0);">Métodos de pago seguros</h3>
+            <img src="{{ 'mastercard.png' | asset_img_url: 'medium' }}" style="max-width: 50px;margin: 10px;">
+            <img src="{{ 'visa.png' | asset_img_url: 'medium' }}" style="max-width: 50px;margin: 10px;">
+            <img src="{{ 'paypal.png' | asset_img_url: 'medium' }}" style="max-width: 50px;margin: 10px;">
+            <img src="{{ 'mercadopago.jpg' | asset_img_url: 'medium' }}" style="max-width: 50px;margin: 10px;">
+            <img src="{{ 'oxxo.png' | asset_img_url: 'medium' }}" style="max-width: 50px;margin: 10px;">
+            <img src="{{ 'protected.png' | asset_img_url: 'medium' }}" style="max-width: 50px;margin: 10px;margin-top: 18px;">
+          </div>
+        </div>
+
+        <!-- Copyright -->
+        <div style="text-align: center;color: #000000;">
+          <p class="copyright" style="color: #000000;font-size: 14px;">Poolmex © 2020 | Todos los derechos reservados.</p>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- MODALS -->
+  {% include 'modals' %}
+
 </footer>
+<!-- End: Footer Dark -->
 
 {% schema %}
   {
