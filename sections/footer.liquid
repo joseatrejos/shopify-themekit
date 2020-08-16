@@ -1,67 +1,132 @@
 <!-- Start: Footer Dark -->
 <footer>
-  <div class="container">
 
-      {%- assign social_accounts = 'Facebook, Twitter, Pinterest, Instagram, Snapchat, Tumblr, YouTube, Vimeo,' | split: ', ' -%}
-      <ul>
-        {% for social in social_accounts %}
-          {%- assign social_handle = social | handleize -%}
-          {% capture social_link %}social_{{ social_handle }}_link{% endcapture %}
-          {% capture social_icon %}icon-{{ social_handle }}{% endcapture %}
+  <!-- Social Media -->
+  <div class="footer-basic">
+    <!-- Definition of a Social Accounts' array -->
+    {%- assign social_accounts = 'Facebook, Twitter, Pinterest, Instagram, Snapchat, Tumblr, YouTube, Vimeo,' | split: ', ' -%}
 
-          {% if settings[social_link] != blank %}
-            <li>
-              <a href="{{ settings[social_link] }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: social }}">
-                {% include social_icon %}
-                <span class="icon-fallback-text">{{ social }}</span>
-              </a>
-            </li>
-          {% endif %}
+    <div class="social">
 
-        {% endfor %}
-      </ul>
-
-      {% if section.settings.show_payment_icons %}
-        {% unless shop.enabled_payment_types == empty %}
-          <span class="visually-hidden">{{ 'layout.footer.payment_methods' | t }}</span>
-          <ul class="payment-icons">
-            {% for type in shop.enabled_payment_types %}
-              <li>
-                {{ type | payment_type_svg_tag: class: 'icon' }}
-              </li>
-            {% endfor %}
-          </ul>
-        {% endunless %}
-      {% endif %}
-
-      {%- assign footer_linklist = section.settings.footer_linklist -%}
-      {% if linklists[footer_linklist].links.size > 0 %}
-        <ul class="nav justify-content-center">
-          {% for link in linklists[footer_linklist].links %}
-            <li  class="nav-item"><a href="{{ link.url }}" class="nav-link active" >{{ link.title }}</a></li>
-          {% endfor %}
-        </ul>
-      {% endif %}
-
-      <div class="text-center">
-        <small>{{ 'layout.footer.copyright' | t }} &copy; {{ 'now' | date: "%Y" }}, {{ shop.name | link_to: '/' }}. {{ powered_by_link }}</small>
-      </div>
+      {% for social in social_accounts %}
+        {%- assign social_handle = social | handleize -%}
+        {% capture social_link %}social_{{ social_handle }}_link{% endcapture %}
+        {% capture social_icon %}icon-{{ social_handle }}{% endcapture %}
+    
+        {% if settings[social_link] != blank %}
+        <a href="{{ settings[social_link] }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: social }}"></a>
+          {% include social_icon %}
+        {% endif %}
+      {% endfor %}
+      <i class="fab fa-instagram"></i>
+    </div>
   </div>
 
+  <div class="container">
+  
+    {% if section.settings.show_payment_icons %}
+    {% unless shop.enabled_payment_types == empty %}
+    <span class="visually-hidden">{{ 'layout.footer.payment_methods' | t }}</span>
+    <ul class="payment-icons">
+      {% for type in shop.enabled_payment_types %}
+      <li>
+        {{ type | payment_type_svg_tag: class: 'icon' }}
+      </li>
+      {% endfor %}
+    </ul>
+    {% endunless %}
+    {% endif %}
+  
+    {%- assign footer_linklist = section.settings.footer_linklist -%}
+    {% if linklists[footer_linklist].links.size > 0 %}
+    <ul class="nav justify-content-center">
+      {% for link in linklists[footer_linklist].links %}
+      <li class="nav-item"><a href="{{ link.url }}" class="nav-link active">{{ link.title }}</a></li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+  
+    <div class="text-center">
+      <small>{{ 'layout.footer.copyright' | t }} &copy; {{ 'now' | date: "%Y" }}, {{ shop.name | link_to: '/' }}.
+        {{ powered_by_link }}</small>
+    </div>
+  </div>
+  
+  <!-- Dynamic Example >
+  <div class="container">
+  
+    {%- assign social_accounts = 'Facebook, Twitter, Pinterest, Instagram, Snapchat, Tumblr, YouTube, Vimeo,' | split: ', ' -%}
+    <ul>
+      {% for social in social_accounts %}
+      {%- assign social_handle = social | handleize -%}
+      {% capture social_link %}social_{{ social_handle }}_link{% endcapture %}
+      {% capture social_icon %}icon-{{ social_handle }}{% endcapture %}
+  
+      {% if settings[social_link] != blank %}
+      <li>
+        <a href="{{ settings[social_link] }}"
+          title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: social }}">
+          {% include social_icon %}
+          <span class="icon-fallback-text">{{ social }}</span>
+        </a>
+      </li>
+      {% endif %}
+  
+      {% endfor %}
+    </ul>
+  
+    {% if section.settings.show_payment_icons %}
+    {% unless shop.enabled_payment_types == empty %}
+    <span class="visually-hidden">{{ 'layout.footer.payment_methods' | t }}</span>
+    <ul class="payment-icons">
+      {% for type in shop.enabled_payment_types %}
+      <li>
+        {{ type | payment_type_svg_tag: class: 'icon' }}
+      </li>
+      {% endfor %}
+    </ul>
+    {% endunless %}
+    {% endif %}
+  
+    {%- assign footer_linklist = section.settings.footer_linklist -%}
+    {% if linklists[footer_linklist].links.size > 0 %}
+    <ul class="nav justify-content-center">
+      {% for link in linklists[footer_linklist].links %}
+      <li class="nav-item"><a href="{{ link.url }}" class="nav-link active">{{ link.title }}</a></li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+  
+    <div class="text-center">
+      <small>{{ 'layout.footer.copyright' | t }} &copy; {{ 'now' | date: "%Y" }}, {{ shop.name | link_to: '/' }}.
+        {{ powered_by_link }}</small>
+    </div>
+  </div-->
+
+
+  <!-- Footer -->
   <div class="footer-dark">
-    <h2 data-aos="fade" data-aos-duration="700" data-aos-delay="50" data-aos-once="true" style="text-align: center;font-size: 25px;color: rgb(0,0,0);">Poolmex</h2>
     <footer>
       <div class="container">
         <div class="row">
 
           <!-- Services -->
-          <div class="col-sm-6 col-md-6 item" data-aos="fade" data-aos-duration="700" data-aos-delay="200"
+          <div class="col-sm-3 col-md-3 item" data-aos="fade" data-aos-duration="700" data-aos-delay="200"
             data-aos-once="true">
             <h3 style="margin-top: 15px;color: rgb(0,0,0);">Acerca de</h3>
             <ul>
               <li><a href="#Privacy" style="color: rgb(28,28,28);" data-toggle="modal">Privacidad</a></li>
               <li><a href="contact.html" style="color: rgb(28,28,28);">Contacto</a></li>
               <li><a href="#FAQ" style="color: rgb(28,28,28);" data-toggle="modal">Preguentas Frecuentes</a></li>
+            </ul>
+          </div>
+
+          <!-- Page Links -->
+          <div class="col-sm-3 col-md-3 item" data-aos="fade" data-aos-duration="700" data-aos-delay="200"
+            data-aos-once="true">
+            <h3 style="margin-top: 15px;color: rgb(0,0,0);">Acerca de</h3>
+            <ul>
+              <li><a href="#Privacy" style="color: rgb(28,28,28);" data-toggle="modal">Privacidad</a></li>
             </ul>
           </div>
 
@@ -79,7 +144,7 @@
 
         <!-- Copyright -->
         <div style="text-align: center;color: #000000;">
-          <p class="copyright" style="color: #000000;font-size: 14px;">Poolmex © 2020 | Todos los derechos reservados.</p>
+          <p class="copyright" style="opacity:0.7; color: #000000;font-size: 14px;">Poolmex © 2020 | Todos los derechos reservados.</p>
         </div>
       </div>
     </footer>
@@ -89,7 +154,6 @@
   {% include 'modals' %}
 
 </footer>
-<!-- End: Footer Dark -->
 
 {% schema %}
   {
