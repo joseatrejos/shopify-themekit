@@ -57,18 +57,22 @@ Theme Store optional settings
                 </div>
 
                 <!-- Price & Buy Button-->
-                <div class="about">
+                <div class="about" style="margin-top: 25px;">
                   <div class="price" style="float:left;">
                     <h3>
                       {{ product.price | money }}
                     </h3>
                   </div>
 
-                  <div class="price" style="float:right;">
-                    <button class="btn btn-primary" type="button">
-                      <i class="fas fa-shopping-cart"></i>
-                    </button>
-                  </div>
+                  <button type="button" @click="addToCart" class="btn btn-primary price" style="float:right;" name="add" data-submit-button {% unless product.available %}disabled="disabled"{% endunless %}>
+                      <!--span data-submit-button-text-->
+                        {% if product.available %}
+                          <i class="fas fa-shopping-cart"></i>
+                        {% else %}
+                          {{ 'product.sold_out' | t }}
+                        {% endif %}
+                      <!--/span-->
+                  </button>
 
                 </div>
               </div>

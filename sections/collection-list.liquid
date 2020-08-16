@@ -11,36 +11,37 @@
   <h2 class="collection-list__title" style="margin-top: 50px; margin-bottom: 50px;">{{ section.settings.title | escape }}</h2>
 {% endif %}
 
-{% for block in section.blocks %}
-  {%- assign collection = collections[block.settings.collection] -%}
+<div class="row">
+  {% for block in section.blocks %}
+    {%- assign collection = collections[block.settings.collection] -%}
 
-  <div class="col-xs-12 col-md-4 col-lg-4 col-xl-4" style="margin-top: 20px; margin-bottom: 40px;">
+    <div class="col-xs-12 col-md-4 col-lg-4 col-xl-4" style="margin-top: 20px; margin-bottom: 40px;">
+        <!-- Collection Image -->
+        {%- assign image_object = collection.image | default: collection.products.first.featured_image -%}
+        
+        {% if collection.image != blank or collection.products.first != blank %}
 
-      <!-- Collection Image -->
-      {%- assign image_object = collection.image | default: collection.products.first.featured_image -%}
-      
-      {% if collection.image != blank or collection.products.first != blank %}
-
-        <div class="image">
+          <div class="image">
+            <a href="{{ collection.url | default: "#" }}">
+              <img class="img-fluid d-block mx-auto" src="{{ collection.products.first.featured_image | img_url: '1160x' }}" alt="{{ product.featured_image.alt | escape }}">
+            </a>
+          </div>
+          
+        {% elsif collection == empty %}
+          {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
+          {{ 'collection-' | append: current | placeholder_svg_tag: 'placeholder-svg placeholder-svg--small' }}
+        {% endif %}
+        
+        <!-- Collection Title -->
+        <div class="product-name text-center" style="color: rgb(0,0,0); margin-top: 25px;" class="anone">
           <a href="{{ collection.url | default: "#" }}">
-            <img class="img-fluid d-block mx-auto" src="{{ collection.products.first.featured_image | img_url: '1160x' }}" alt="{{ product.featured_image.alt | escape }}">
+            {{ collection.title | default: default_label }}
           </a>
         </div>
-        
-      {% elsif collection == empty %}
-        {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
-        {{ 'collection-' | append: current | placeholder_svg_tag: 'placeholder-svg placeholder-svg--small' }}
-      {% endif %}
+    </div>
 
-      <!-- Collection Title -->
-      <div class="product-name text-center" style="color: rgb(0,0,0);" class="anone">
-        <a href="{{ collection.url | default: "#" }}">
-          {{ collection.title | default: default_label }}
-        </a>
-      </div>
-  </div>
-
-{% endfor %}
+  {% endfor %}
+</div>
 
 {% if section.blocks.size == 0 %}
   {% include 'no-blocks' %}
