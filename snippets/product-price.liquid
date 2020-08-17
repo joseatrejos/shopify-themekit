@@ -1,31 +1,56 @@
 <div class="product-price">
-        {% if product.compare_at_price > product.price %}
+  {% if product.compare_at_price > product.price %}
+  <p class="float-left">
 
-          {% if product.price_varies %}
-            {%- assign sale_price = product.price | money -%}
-            {{ 'products.product.on_sale_from_html' | t: price: sale_price }}
-          {% else %}
-            {{ 'products.product.on_sale' | t }}
-            {{ product.price | money }}
-          {% endif %}
+    <!-- ???  -->
+    {% if product.price_varies %}
+    {%- assign sale_price = product.price | money -%}
+    {{ 'products.product.on_sale_from_html' | t: price: sale_price }}
 
-        {% else %}
+    <!-- Else, print discount label and current price when there's a discount  -->
+    {% else %}
 
-          {% if product.price_varies %}
-            {%- assign price = product.price | money -%}
-            {{ 'products.product.from_text_html' | t: price: price }}
-          {% else %}
-            {{ product.price | money }}
-          {% endif %}
+    <!-- "With discount" text >
+    {{ 'products.product.on_sale' | t }} -->
 
-        {% endif %}
+    <!-- Price -->
+    {{ product.price | money }}
 
-        {% if product.compare_at_price > product.price %}
-          <span class="visually-hidden">{{ 'products.product.regular_price' | t }}</span>
-          <s>{{ product.compare_at_price | money }}</s>
-        {% endif %}
+  </p>
+  {% endif %}
 
-        {% unless product.available %}
-          {{ 'products.product.sold_out' | t }}
-        {% endunless %}
+  {% else %}
+  <p class="float-left">
+
+    <!-- Prints the product's price when there's no discount -->
+    {% if product.price_varies %}
+    {%- assign price = product.price | money -%}
+    {{ 'products.product.from_text_html' | t: price: price }}
+    {% else %}
+    {{ product.price | money }}
+    {% endif %}
+
+  </p>
+  {% endif %}
+
+  <!-- Prints strikethrough price and an unavailability label -->
+  {% if product.compare_at_price > product.price %}
+  <p class="float-right">
+
+    <!-- "Original Price" Label >
+    <span class="visually-hidden">{{ 'products.product.regular_price' | t }}</span>
+            
+    <!-- Original price without the discount -->
+    <s>{{ product.compare_at_price | money }}</s>
+  </p>
+  {% endif %}
+
+  <!-- "Sold out" Text -->
+  {% unless product.available %}
+  <br/><br/>
+  <p class="text-danger float-right">
+    {{ 'products.product.sold_out' | t }}
+  </p>
+  {% endunless %}
+  </p>
 </div>

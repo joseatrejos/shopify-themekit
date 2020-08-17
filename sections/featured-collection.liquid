@@ -20,7 +20,7 @@ Theme Store optional settings
 
         <!-- Title -->
         {% if section.settings.title != blank %}
-        <h2 class="featured-collection__title">{{ section.settings.title | escape }}</h2>
+          <h2 class="featured-collection__title">{{ section.settings.title | escape }}</h2>
         {% endif %}
 
         <!-- Products -->
@@ -29,54 +29,54 @@ Theme Store optional settings
 
             {% for product in collection.products limit: 6 %}
 
-            <div class="col-xs-12 col-sm-5 col-md-5 col-lg-5 offset-sm-1 offset-md-1 offset-lg-1"
-              style="margin-top: 20px; margin-bottom: 40px;">
-              <div class="clean-product-item">
+              <div class="col-xs-12 col-sm-5 col-md-5 col-lg-5 offset-sm-1 offset-md-1 offset-lg-1"
+                style="margin-top: 20px; margin-bottom: 40px;">
+                <div class="clean-product-item">
 
-                <!-- Product Image -->
-                <div class="image">
-                  <a href="{{ product.url | within: collection }}">
-                    <img class="img-fluid d-block mx-auto" src="{{ product.featured_image | img_url: '1160x' }}"
-                      alt="{{ product.featured_image.alt | escape }}">
-                  </a>
-                </div>
-
-                <!-- Product Title -->
-                <div class="product-name text-center" style="color: rgb(0,0,0);" class="anone">
-                  <a href="{{ product.url | within: collection }}">
-                    {{ product.title | escape }}
-                  </a>
-                </div>
-
-                <!-- Product Dimensions -->
-                <div class="product-name text-center">
-                  <a href="{{ product.url | within: collection }}" style="color: rgb(143, 140, 140); font-size: 14px;"
-                    class="anone">
-                    2.95m x 1.70m x 61cm
-                  </a>
-                </div>
-
-                <!-- Price & Buy Button-->
-                <div class="about" style="margin-top: 25px;">
-                  <div class="price" style="float:left;">
-                    <h3>
-                      {{ product.price | money }}
-                    </h3>
+                  <!-- Product Image -->
+                  <div class="image">
+                    <a href="{{ product.url | within: collection }}">
+                      <img class="img-fluid d-block mx-auto" src="{{ product.featured_image | img_url: '1160x' }}"
+                        alt="{{ product.featured_image.alt | escape }}">
+                    </a>
                   </div>
 
-                  <button type="button" @click="addToCart" class="btn btn-primary price" style="float:right;" name="add" data-submit-button {% unless product.available %}disabled="disabled"{% endunless %}>
-                      <!--span data-submit-button-text-->
-                        {% if product.available %}
-                          <i class="fas fa-shopping-cart"></i>
-                        {% else %}
-                          {{ 'product.sold_out' | t }}
-                        {% endif %}
-                      <!--/span-->
-                  </button>
+                  <!-- Product Title -->
+                  <div class="product-name text-center" style="color: rgb(0,0,0);" class="anone">
+                    <a href="{{ product.url | within: collection }}">
+                      {{ product.title | escape }}
+                    </a>
+                  </div>
 
+                  <!-- Product Dimensions -->
+                  <div class="product-name text-center">
+                    <a href="{{ product.url | within: collection }}" style="color: rgb(143, 140, 140); font-size: 14px;"
+                      class="anone">
+                      2.95m x 1.70m x 61cm
+                    </a>
+                  </div>
+
+                  <!-- Price & Buy Button-->
+                  <div class="about" style="margin-top: 25px;">
+                    <div class="price" style="float:left;">
+                      <h3>
+                        {{ product.price | money }}
+                      </h3>
+                    </div>
+
+                    <button type="button" @click="addToCart" class="btn btn-primary price" style="float:right;" name="add" data-submit-button {% unless product.available %}disabled="disabled"{% endunless %}>
+                        <!--span data-submit-button-text-->
+                          {% if product.available %}
+                            <i class="fas fa-shopping-cart"></i>
+                          {% else %}
+                            {{ 'product.sold_out' | t }}
+                          {% endif %}
+                        <!--/span-->
+                    </button>
+
+                  </div>
                 </div>
               </div>
-            </div>
 
             {% endfor %}
 

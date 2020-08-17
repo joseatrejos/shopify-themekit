@@ -1,5 +1,16 @@
 <nav class="navbar navbar-light navbar-expand-lg fixed-top bg-white text-center">
-  <div class="container"><a class="navbar-brand logo" href="/" style="font-family: 'Source Serif Pro', serif;">PoolMex</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+  <div class="container">
+
+        <!-- Brand Logo -->
+        <a class="navbar-brand logo logopoolmex" href="/" style="font-family: 'Source Serif Pro', serif;">
+          PoolMex
+        </a>
+
+        <!-- Mobile toggle -->
+        <button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1">
+          <span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span>
+        </button>
+
         <div class="collapse navbar-collapse" id="navcol-1">
           <ul class="nav navbar-nav ml-auto">
             {% for link in linklists[section.settings.menu].links %}

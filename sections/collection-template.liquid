@@ -2,94 +2,118 @@
   
   {% assign productCount = collection.all_products_count | minus: paginate.current_offset %}
 
-  <div class="{%if section.settings.is_full_width %} container-fluid {%else%} container {%endif%} vh-100">
+  <div class="{%if section.settings.is_full_width %} container-fluid {%else%} container {%endif%}">
 
-        <header role="banner" 
-                class="d-flex align-items-center" 
-                style="min-height: {{section.settings.header_height}}px;">
+        <!-- Page Title -->
+        <header role="banner" class="d-flex align-items-center" style="min-height: {{section.settings.header_height}}px;">
             <div class="w-100">
-              <h1 class="text-{{section.settings.header_align}}">{{ collection.title }}</h1>
+              <h1 class="text-{{section.settings.header_align}}">
+                {{ collection.title }}
+              </h1>
+
               {% if collection.description != blank %}
                 <div class="text-{{section.settings.header_align}} ">
                   {{ collection.description }}
                 </div>
               {% endif %}
+
             </div>
         </header>
       
         <div class="row">
-            <div class="col-md-3">
-                {% if section.settings.collection_nav %}
-
-                  {% assign sidebarNav = section.settings.collection_nav %}
-
-                  <div class="card mb-4">
-                      <div class="card-header">
-                        <strong>{{ linklists[sidebarNav].title }}</strong>
-                      </div>
-
-                      <ul class="list-group list-group-flush">
-                          {% for link in linklists[sidebarNav].links %}
-                             <li class="list-group-item">
-                               <a href="{{ link.url }}">{{ link.title }}</a>
-                             </li>
-                          {% endfor %}
-                      </ul>
-
-                  </div>
+            <!-- Sidebar -->
+            <div class="col-md-3" style="margin-bottom:40px">
+                
+              <!-- Sidebar for collections -->
+              {% if collection.all_tags.size > 0 and section.settings.hide_tags != true %}
+                <div class="card mb-4">
                   
-                {% endif %}
+                    <!-- Sidebar Header -->
+                    <div class="card-header">
+                      <strong>Categorías</strong>
+                    </div>
 
-                {% if collection.all_tags.size > 0 and section.settings.hide_tags != true %}
-                  <div class="card mb-4">
-                      <div class="card-header">
-                        <strong>Tags</strong>
-                      </div>
+                    <!-- Sidebar List -->
+                    <ul class="list-group list-group-flush">
+                      {%- for listed_collection in collections -%}
+                        {% if listed_collection.title == collection.title%}
 
-                      <ul class="list-group list-group-flush">
-                        {% for tag in collection.all_tags %}
-                          {% if current_tags contains tag %}
+                          <a href="{{ listed_collection.url }}" class="anone text-white">
                             <li class="list-group-item bg-primary">
-                              {{ tag | link_to_remove_tag: tag }}
+                                {{ listed_collection.title }}
                             </li>
-                          {% else %}
+                          </a>
+
+                        {% else %}
+
+                          <a href="{{ listed_collection.url }}" class="anone text-primary">
                             <li class="list-group-item">
-                              {{ tag | link_to_tag: tag }}
+                                {{ listed_collection.title }}
                             </li>
-                          {% endif %}
-                        {% endfor %}
-                      </ul>
+                          </a>
 
-                  </div>
-                {% endif %}
+                        {% endif %}
+                      {% endfor %}
+                    </ul>
+                </div>
+              {% endif %}
+                
+              <!-- Sidebar For Tags>
+              {% if collection.all_tags.size > 0 and section.settings.hide_tags != true %}
+                <div class="card mb-4">
+                  
+                    <!-- Sidebar Header >
+                    <div class="card-header">
+                      <strong>Categorías</strong>
+                    </div>
 
+                    <!-- Sidebar List >
+                    <ul class="list-group list-group-flush">
+                      {% for tag in collection.all_tags %}
+                        {% if current_tags contains tag %}
+                          <li class="list-group-item bg-light">
+                            {{ tag | link_to_remove_tag: tag }}
+                          </li>
+                        {% else %}
+                          <li class="list-group-item">
+                            {{ tag | link_to_tag: tag }}
+                          </li>
+                        {% endif %}
+                      {% endfor %}
+                    </ul>
+
+                </div>
+              {% endif %} -->
             </div>
 
+            <!-- Products -->
             <div class="col-md-9">
                 <div class="row">
 
                     {% for product in collection.products %}
-                      <div class="col-md-4">
-                        <div class="product-item">
+                      <div class="col-md-6 col-lg-4" style="margin-bottom:60px">
 
+                            <!-- Product Image -->
                             {% if product.featured_image != blank %}
-                              <a href="{{ product.url | within: collection }}">
-                                  <img src={{ product.featured_image | img_url:'300x'}} data-src="{{ product.featured_image |     img_url:'500x500', crop:'center' }}" 
-                                      alt="" class="img-fluid lazyload">
+                              <a href="{{ product.url | within: collection }}" class="d-sm-flex justify-content-sm-center align-items-sm-center">
+                                  <img src={{ product.featured_image | img_url:'300x'}} data-src="{{ product.featured_image | img_url:'500x500', crop:'center' }}" alt="{{ product.featured_image.alt }}" class="img-fluid lazyload" style="margin-bottom:30px">
                               </a>
                             {% endif %}
-                            <p>
-                              <a href="{{ product.url | within: collection }}">{{ product.title }}</a>
+
+                            <!-- Product name with link -->
+                            <p class="text-center" style="margin-bottom:15px">
+                              <a href="{{ product.url | within: collection }}" class="anone text-primary">
+                                {{ product.title }}
+                              </a>
                             </p>
 
+                            <!-- Price -->
                             {% include 'product-price' %}
 
-                        </div>
-
                       </div>
-                
                     {% endfor %}
-
+                    
+                    <!-- If there are no products -->
                     {% if productCount == 0 %}
                         <div class="col-md-4">
                           <h4 class="text-center">
@@ -97,21 +121,16 @@
                           </h4>
                         </div>
                     {% endif %}
+
                 </div>
                 
+                <!-- Pagination -->
                 {% if paginate.pages > 1 %}
                   {% include 'pagination' %}
                 {% endif %}
-
             </div>
-
         </div>
-
-
-
   </div>
-
-  
 {% endpaginate %}
 
 

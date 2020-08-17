@@ -1,10 +1,10 @@
 <section data-section-id="{{ section.id }}" data-section-type="product">
   
-  <div class="container-fluid">
+  <div class="container">
     <div class="row">
 
         <!-- Start: Pretty Carousel Fade + TouchSwipe -->
-        <div class="col-md-7">
+        <div class="col-md-6">
           {%- assign current_variant = product.selected_or_first_available_variant -%}
           {%- assign featured_image = current_variant.featured_image | default: product.featured_image -%}
           
@@ -60,7 +60,7 @@
         <!-- End: Pretty Carousel Fade + TouchSwipe -->
 
         <!-- Start: Product's Information/Content -->
-        <div class="col-md-5">
+        <div class="col-md-6">
             
             <!-- Title -->
             <h1>{{ product.title }}</h1>
@@ -88,7 +88,8 @@
                    
           
             {% include 'product-form' %}
-          
+            
+            <!-- Description -->
             <div class="rte">
               {{ product.description }}
             </div>
