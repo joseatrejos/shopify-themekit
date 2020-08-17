@@ -94,11 +94,10 @@
 
           <!-- Product Image -->
           {% if product.featured_image != blank %}
-          <a href="{{ product.url | within: collection }}"
-            class="d-sm-flex justify-content-sm-center align-items-sm-center">
+          <a href="{{ product.url | within: collection }}">
             <img src={{ product.featured_image | img_url:'300x'}}
               data-src="{{ product.featured_image | img_url:'500x500', crop:'center' }}"
-              alt="{{ product.featured_image.alt }}" class="img-fluid lazyload" style="margin-bottom:30px">
+              alt="{{ product.featured_image.alt }}" class="img-fluid lazyload d-block mx-auto" style="margin-bottom:30px">
           </a>
           {% endif %}
 
