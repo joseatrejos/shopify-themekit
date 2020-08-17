@@ -1,64 +1,63 @@
 {% paginate collection.products by 12 %}
-  
-  {% assign productCount = collection.all_products_count | minus: paginate.current_offset %}
 
-  <div class="{%if section.settings.is_full_width %} container-fluid {%else%} container {%endif%}">
+{% assign productCount = collection.all_products_count | minus: paginate.current_offset %}
 
-        <!-- Page Title -->
-        <header role="banner" class="d-flex align-items-center" style="min-height: {{section.settings.header_height}}px;">
-            <div class="w-100">
-              <h1 class="text-{{section.settings.header_align}}">
-                {{ collection.title }}
-              </h1>
+<div class="container">
+  <!-- Page Title -->
+  <header role="banner" class="d-flex align-items-center" style="min-height: {{section.settings.header_height}}px;">
+    <div class="w-100">
+      <h1 class="text-{{section.settings.header_align}}">
+        {{ collection.title }}
+      </h1>
 
-              {% if collection.description != blank %}
-                <div class="text-{{section.settings.header_align}} ">
-                  {{ collection.description }}
-                </div>
-              {% endif %}
+      {% if collection.description != blank %}
+      <div class="text-{{section.settings.header_align}} ">
+        {{ collection.description }}
+      </div>
+      {% endif %}
 
-            </div>
-        </header>
-      
-        <div class="row">
-            <!-- Sidebar -->
-            <div class="col-md-3" style="margin-bottom:40px">
-                
-              <!-- Sidebar for collections -->
-              {% if collection.all_tags.size > 0 and section.settings.hide_tags != true %}
-                <div class="card mb-4">
-                  
-                    <!-- Sidebar Header -->
-                    <div class="card-header">
-                      <strong>Categorías</strong>
-                    </div>
+    </div>
+  </header>
+</div>
 
-                    <!-- Sidebar List -->
-                    <ul class="list-group list-group-flush">
-                      {%- for listed_collection in collections -%}
-                        {% if listed_collection.title == collection.title%}
+<div class="{%if section.settings.is_full_width %} container-fluid {%else%} container {%endif%}">
+  <div class="row">
+    <!-- Sidebar -->
+    <div class="col-md-3" style="margin-bottom:40px">
 
-                          <a href="{{ listed_collection.url }}" class="anone text-white">
-                            <li class="list-group-item bg-primary">
-                                {{ listed_collection.title }}
-                            </li>
-                          </a>
+      <!-- Sidebar for collections -->
+      <div class="card mb-4">
 
-                        {% else %}
+        <!-- Sidebar Header -->
+        <div class="card-header">
+          <strong>Categorías</strong>
+        </div>
 
-                          <a href="{{ listed_collection.url }}" class="anone text-primary">
-                            <li class="list-group-item">
-                                {{ listed_collection.title }}
-                            </li>
-                          </a>
+        <!-- Sidebar List -->
+        <ul class="list-group list-group-flush">
+          {%- for listed_collection in collections -%}
+          {% if listed_collection.title == collection.title%}
 
-                        {% endif %}
-                      {% endfor %}
-                    </ul>
-                </div>
-              {% endif %}
-                
-              <!-- Sidebar For Tags>
+          <a href="{{ listed_collection.url }}" class="anone text-white">
+            <li class="list-group-item bg-primary">
+              {{ listed_collection.title }}
+            </li>
+          </a>
+
+          {% else %}
+
+          <a href="{{ listed_collection.url }}" class="anone text-primary">
+            <li class="list-group-item">
+              {{ listed_collection.title }}
+            </li>
+          </a>
+
+          {% endif %}
+          {% endfor %}
+        </ul>
+      </div>
+
+      <!-- Sidebar For Tags>
               {% if collection.all_tags.size > 0 and section.settings.hide_tags != true %}
                 <div class="card mb-4">
                   
@@ -84,127 +83,130 @@
 
                 </div>
               {% endif %} -->
-            </div>
+    </div>
 
-            <!-- Products -->
-            <div class="col-md-9">
-                <div class="row">
+    <!-- Products -->
+    <div class="col-md-9">
+      <div class="row">
 
-                    {% for product in collection.products %}
-                      <div class="col-md-6 col-lg-4" style="margin-bottom:60px">
+        {% for product in collection.products %}
+        <div class="col-md-6 col-lg-4" style="margin-bottom:60px">
 
-                            <!-- Product Image -->
-                            {% if product.featured_image != blank %}
-                              <a href="{{ product.url | within: collection }}" class="d-sm-flex justify-content-sm-center align-items-sm-center">
-                                  <img src={{ product.featured_image | img_url:'300x'}} data-src="{{ product.featured_image | img_url:'500x500', crop:'center' }}" alt="{{ product.featured_image.alt }}" class="img-fluid lazyload" style="margin-bottom:30px">
-                              </a>
-                            {% endif %}
+          <!-- Product Image -->
+          {% if product.featured_image != blank %}
+          <a href="{{ product.url | within: collection }}"
+            class="d-sm-flex justify-content-sm-center align-items-sm-center">
+            <img src={{ product.featured_image | img_url:'300x'}}
+              data-src="{{ product.featured_image | img_url:'500x500', crop:'center' }}"
+              alt="{{ product.featured_image.alt }}" class="img-fluid lazyload" style="margin-bottom:30px">
+          </a>
+          {% endif %}
 
-                            <!-- Product name with link -->
-                            <p class="text-center" style="margin-bottom:15px">
-                              <a href="{{ product.url | within: collection }}" class="anone text-primary">
-                                {{ product.title }}
-                              </a>
-                            </p>
+          <!-- Product name with link -->
+          <p class="text-center" style="margin-bottom:15px">
+            <a href="{{ product.url | within: collection }}" class="anone text-primary">
+              {{ product.title }}
+            </a>
+          </p>
 
-                            <!-- Price -->
-                            {% include 'product-price' %}
+          <!-- Price -->
+          {% include 'product-price' %}
 
-                      </div>
-                    {% endfor %}
-                    
-                    <!-- If there are no products -->
-                    {% if productCount == 0 %}
-                        <div class="col-md-4">
-                          <h4 class="text-center">
-                              No products
-                          </h4>
-                        </div>
-                    {% endif %}
-
-                </div>
-                
-                <!-- Pagination -->
-                {% if paginate.pages > 1 %}
-                  {% include 'pagination' %}
-                {% endif %}
-            </div>
         </div>
+        {% endfor %}
+
+        <!-- If there are no products -->
+        {% if productCount == 0 %}
+        <div class="col-md-4">
+          <h4 class="text-center">
+            No products
+          </h4>
+        </div>
+        {% endif %}
+
+      </div>
+
+      <!-- Pagination -->
+      {% if paginate.pages > 1 %}
+      {% include 'pagination' %}
+      {% endif %}
+    </div>
   </div>
+</div>
 {% endpaginate %}
 
 
 
 {% schema %}
-  {
-    "name": "Collection",
-    "settings": [
-      {
-        "type": "header",
-        "content": "Collection header"
-      },
-      {
-        "type": "checkbox",
-        "id": "is_full_width",
-        "label": "Full width",
-        "default": false
-      },
-      {
-        "type": "select",
-        "id": "header_align",
-        "options": [
-            { 
-              "value": "right", 
-              "label": "Text right"
-            },
-            { 
-              "value": "center", 
-              "label": "Text center"
-            },
-            { 
-              "value": "left", 
-              "label": "Text left"
-            }
-        ],
-        "label": "Header alignment",
-        "default": "left"
-      },
-      {
-        "type":      "range",
-        "id":        "header_height",
-        "min":       50,
-        "max":        500,
-        "step":       5,
-        "unit":       "px",
-        "label":     "Header height",
-        "default":   120
-      },
-      {
-        "type": "header",
-        "content": "Sidebar"
-      },
-      {
-        "type": "link_list",
-        "id": "collection_nav",
-        "label": "Navigation",
-        "info": "Select custom menu nav for sidebar"
-      },
-      {
-        "type": "checkbox",
-        "id": "hide_tags",
-        "label": "Hide tags",
-        "default": false,
-        "info": "Hide tags from sidebar"
-      },
-      {
-        "type": "header",
-        "content": "Others"
-      },
-      {
-        "type": "paragraph",
-        "content": "You can add more settings here :) "
-      }
-    ]
-  
-  }
+{
+"name": "Collection",
+"settings": [
+{
+"type": "header",
+"content": "Collection header"
+},
+{
+"type": "checkbox",
+"id": "is_full_width",
+"label": "Full width",
+"default": false
+},
+{
+"type": "select",
+"id": "header_align",
+"options": [
+{
+"value": "right",
+"label": "Text right"
+},
+{
+"value": "center",
+"label": "Text center"
+},
+{
+"value": "left",
+"label": "Text left"
+}
+],
+"label": "Header alignment",
+"default": "left"
+},
+{
+"type": "range",
+"id": "header_height",
+"min": 50,
+"max": 500,
+"step": 5,
+"unit": "px",
+"label": "Header height",
+"default": 120
+},
+{
+"type": "header",
+"content": "Sidebar"
+},
+{
+"type": "link_list",
+"id": "collection_nav",
+"label": "Navigation",
+"info": "Select custom menu nav for sidebar"
+},
+{
+"type": "checkbox",
+"id": "hide_tags",
+"label": "Hide tags",
+"default": false,
+"info": "Hide tags from sidebar"
+},
+{
+"type": "header",
+"content": "Others"
+},
+{
+"type": "paragraph",
+"content": "You can add more settings here :) "
+}
+]
+
+}
 {% endschema %}
