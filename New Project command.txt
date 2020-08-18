@@ -1,0 +1,4 @@
+theme new --password=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 --store=poolmx.myshopify.com --name=Subtle2.0
+
+REMEMBER TO RUN:
+theme watch
