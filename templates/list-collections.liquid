@@ -1,0 +1,91 @@
+{% comment %}
+  This page represents the /collections and /products pages.
+{% endcomment %}
+
+<div class="container" style="margin-top: 100px;">
+  
+  <!-- All Collections Title -->
+  <h1>{{ page_title }}</h1>
+
+</div>  
+
+<hr/>
+
+<div class="container">
+
+  <div class="row">
+    <!-- Sidebar -->
+    <div class="col-md-3" style="margin-bottom:40px">
+
+      <!-- Sidebar for collections -->
+      <div class="card mb-4">
+
+        <!-- Sidebar Header -->
+        <div class="card-header">
+          <strong>Categorías</strong>
+        </div>
+
+        <!-- Sidebar List -->
+        <ul class="list-group list-group-flush">
+          {%- for listed_collection in collections -%}
+          {% if listed_collection.title == collection.title%}
+
+          <a href="{{ listed_collection.url }}" class="anone text-white">
+            <li class="list-group-item bg-primary">
+              {{ listed_collection.title }}
+            </li>
+          </a>
+
+          {% else %}
+
+          <a href="{{ listed_collection.url }}" class="anone text-primary">
+            <li class="list-group-item">
+              {{ listed_collection.title }}
+            </li>
+          </a>
+
+          {% endif %}
+          {% endfor %}
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- Products -->
+    <div class="col-md-9">
+      <div class="row">
+
+        <!-- List of all collections -->
+        {% for collection in collections %}
+          {% unless collection.handle == 'frontpage' %}
+
+            <div class="col-md-6 col-lg-5 col-xl-4" style="margin-bottom:60px">
+              
+              <!-- Image -->
+              <a href="{{ collection.url }}" title="{{ 'collections.general.link_title' | t: title: title }}">
+                
+                {% if collection.image != blank or collection.products.first != blank %}
+                  {%- assign image_object = collection.image | default: collection.products.first.featured_image -%}
+                  {% include 'responsive-image' with image: image_object, max_width: 480, max_height: 480 %}
+
+                {% else %}
+                  {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
+                  {{ 'collection-' | append: current | placeholder_svg_tag: 'placeholder-svg placeholder-svg--small' }}
+                {% endif %}
+                
+              </a>
+
+              <!-- Collection name -->
+              <p class="text-center">
+                <a href="{{ collection.url }}" title="{{ 'collections.general.link_title' | t: title: title }}" class=" text=center anone text-primary">{{ collection.title }}</a>
+              </p>
+
+            </div>
+
+          {% endunless %}
+        {% endfor %}
+
+      </div>
+    </div>
+  </div>
+</div>
