@@ -1,7 +1,13 @@
-<div class="container">
+<div class="container" style="margin-top:100px;">
 
   {% if cart.item_count > 0 %}
     <h1 class="my-4">{{ 'cart.general.title' | t }}</h1>
+
+</div>
+
+<hr/>
+
+<div class="container">
 
     <form action="/cart" method="post" class="cart-form" novalidate>
       <div class="row">
@@ -140,7 +146,13 @@
     </form>
   {% else %}
 
-  <h1>{{ 'cart.general.title' | t }}</h1>
+    <h1>{{ 'cart.general.title' | t }}</h1>
+
+  </div>
+
+  <hr/>
+
+<div class="container">
 
   {% comment %}
   Cart empty state

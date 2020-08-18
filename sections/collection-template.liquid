@@ -2,23 +2,25 @@
 
 {% assign productCount = collection.all_products_count | minus: paginate.current_offset %}
 
-<div class="container">
+<div class="container" style="margin-top: 100px;">
   <!-- Page Title -->
-  <header role="banner" class="d-flex align-items-center" style="min-height: {{section.settings.header_height}}px;">
+  <header role="banner" class="d-flex align-items-center">
     <div class="w-100">
-      <h1 class="text-{{section.settings.header_align}}">
+      <h1 class="text-{{section.settings.header_align}}" style="margin-bottom:0px;">
         {{ collection.title }}
       </h1>
 
       {% if collection.description != blank %}
-      <div class="text-{{section.settings.header_align}} ">
-        {{ collection.description }}
-      </div>
+        <div class="text-{{section.settings.header_align}} ">
+          {{ collection.description }}
+        </div>
       {% endif %}
 
     </div>
   </header>
 </div>
+
+<hr/>
 
 <div class="{%if section.settings.is_full_width %} container-fluid {%else%} container {%endif%}">
   <div class="row">

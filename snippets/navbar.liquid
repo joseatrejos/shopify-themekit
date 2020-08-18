@@ -8,26 +8,30 @@
 
         <!-- Mobile toggle -->
         <button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1">
-          <span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span>
+          <span class="sr-only">Toggle navigation</span>
+          <span class="navbar-toggler-icon"></span>
         </button>
 
         <div class="collapse navbar-collapse" id="navcol-1">
           <ul class="nav navbar-nav ml-auto">
             {% for link in linklists[section.settings.menu].links %}
 
-              {% if link.links != "#" %}
+              <!-- link.levels returns the number of nested steps below that link, check it out here: https://shopify.dev/docs/themes/liquid/reference/objects/link -->
+              {% if link.levels == 0 %}
+
                 <!-- Non-dropdown Navbar Links -->
                 <li class="nav-item" role="presentation">
                   <a class="nav-link" href="{{ link.url }}" style="margin-right: 10px;color: rgb(0,0,0,0.75);">
                     {{ link.title }}
                   </a>
-                  </li>
                 </li>
 
               {% else %}
                 <!-- Products' Dropdown -->
                 <li class="nav-item dropdown">
-                  <a class="dropdown-toggle nav-link menu_links" data-toggle="dropdown" aria-expanded="false" style="margin-right: 10px;color: rgb(0,0,0,0.75);border-color: rgba(0,0,0,0);">Productos</a>
+                  <a class="dropdown-toggle nav-link menu_links" data-toggle="dropdown" aria-expanded="false" style="margin-right: 10px;color: rgb(0,0,0,0.75);border-color: rgba(0,0,0,0);">
+                    Productos
+                  </a>
                   <div class="dropdown-menu" role="menu">
                     {% for childlink in link.links %}
                       <a class="dropdown-item" role="presentation" href="{{ childlink.url }}">
