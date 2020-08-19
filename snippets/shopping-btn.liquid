@@ -1,0 +1,12 @@
+{% form 'product', product, data-product-handle: product.handle, data-enable-history-state: 'true' %}
+
+    <div class="form-group">
+
+        <button type="button" @click="addToCart" class="btn btn-primary" name="add" data-submit-button  style="float:right;" >
+            <span data-submit-button-text>
+                <i class="fas fa-shopping-cart"></i>
+            </span>
+        </button>
+
+    </div>
+{% endform %}

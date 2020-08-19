@@ -63,15 +63,15 @@ Theme Store optional settings
                         {{ product.price | money }}
                       </h3>
                     </div>
-
+                  
                     <button type="button" @click="addToCart" class="btn btn-primary price" style="float:right;" name="add" data-submit-button {% unless product.available %}disabled="disabled"{% endunless %}>
-                        <!--span data-submit-button-text-->
+                        <span data-submit-button-text-->
                           {% if product.available %}
                             <i class="fas fa-shopping-cart"></i>
                           {% else %}
-                            {{ 'product.sold_out' | t }}
+                            {{ 'products.product.sold_out' | t }}
                           {% endif %}
-                        <!--/span-->
+                        </span>
                     </button>
 
                   </div>
