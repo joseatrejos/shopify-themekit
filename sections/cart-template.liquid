@@ -122,7 +122,7 @@
       
             </table>
         </div>
-
+        
         <div class="col-md-4">
           <div class="cart-sidebar">
               {% if settings.cart_notes_enable %}
@@ -130,7 +130,7 @@
                   <textarea class="form-control" name="note" id="CartSpecialInstructions">{{ cart.note }}</textarea>
               {% endif %}
         
-                <p>{{ 'cart.general.subtotal' | t }}</p>
+                <p style="margin-top:20px">{{ 'cart.general.subtotal' | t }}</p>
                 <p v-if='cart'>${ cart_total_price | money }</p>
                 {% if cart.total_discounts > 0 %}
                   <p>{{ 'cart.general.savings' | t }} {{ cart.total_discounts | money }}</p>

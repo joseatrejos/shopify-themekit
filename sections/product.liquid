@@ -69,13 +69,13 @@
             <div data-price-wrapper class="my-2 text-left" style="padding-top: 10px;">
               
                 <!-- Current Price -->
-                <p data-product-price class="float-left">
+                <p data-product-price class="float-left" style="margin-bottom:0px">
                   {{ current_variant.price | money }}
                 </p>
           
                 <!-- Strikethrough Price -->
                 {% if product.compare_at_price_max > product.price %}
-                  <p class="float-right">
+                  <p class="float-right" style="margin-bottom:0px">
 
                     <!-- Precio habitual -->
                     <span class="visually-hidden" data-compare-text>{{ 'products.product.regular_price' | t }}</span>

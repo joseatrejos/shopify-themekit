@@ -17,7 +17,7 @@
 
         <!-- If there is a link written in the shopify admin panel on the theme's social media input -->
         {% if settings[social_link] != blank %}
-          <a href="{{ settings[social_link] }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: social }}" style="margin-top:45px">
+          <a href="{{ settings[social_link] }}" target="_blank" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: social }}" style="margin-top:45px">
             {% include social_icon %}
           </a>
         {% endif %}
