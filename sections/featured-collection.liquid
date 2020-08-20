@@ -63,16 +63,59 @@ Theme Store optional settings
                         {{ product.price | money }}
                       </h3>
                     </div>
-                  
-                    <button type="button" @click="addToCart" class="btn btn-primary price" style="float:right;" name="add" data-submit-button {% unless product.available %}disabled="disabled"{% endunless %}>
-                        <span data-submit-button-text-->
-                          {% if product.available %}
-                            <i class="fas fa-shopping-cart"></i>
-                          {% else %}
-                            {{ 'products.product.sold_out' | t }}
-                          {% endif %}
-                        </span>
-                    </button>
+
+                    <!-- Add to Cart Button + an invisible variant selector -->
+                    <form action="/cart/add" method="post" enctype="multipart/form-data">
+                      {% unless product.has_only_default_variant %}
+                        {% for option in product.options_with_values %}
+                          <div class="selector-wrapper js">
+                            <label for="SingleOptionSelector-{{ section.id }}-{{ forloop.index0 }}">
+                              {{ option.name }}
+                            </label>
+                
+                            <select
+                              id="SingleOptionSelector-{{ section.id }}-{{ forloop.index0 }}"
+                              data-single-option-selector
+                              data-index="option{{ option.position }}">
+                              {% for value in option.values %}
+                                <option
+                                  value="{{ value | escape }}"
+                                  {% if option.selected_value == value %}selected="selected"{% endif %}>
+                                    {{ value }}
+                                </option>
+                              {% endfor %}
+                            </select>
+                          </div>
+                        {% endfor %}
+                      {% endunless %}
+                
+                      <select name="id" class="no-js" data-product-select style="display: none;">
+                        {% for variant in product.variants %}
+                          <option
+                            {% if variant == product.selected_or_first_available_variant %}selected="selected"{% endif %}
+                            {% unless variant.available %}disabled="disabled"{% endunless %}
+                            value="{{ variant.id }}">
+                              {{ variant.title }}
+                          </option>
+                        {% endfor %}
+                      </select>
+                
+                      <button
+                        class="btn btn-primary float-right"
+                        type="submit"
+                        name="add"
+                        data-add-to-cart
+                        {% unless product.available %}disabled="disabled"{% endunless %}
+                        {% if section_onboarding %}disabled="disabled"{% endif %}>
+                          <span data-add-to-cart-text>
+                            {% if product.available %}
+                              <i class="fas fa-shopping-cart"></i>
+                            {% else %}
+                              {{ 'products.product.sold_out' | t }}
+                            {% endif %}
+                          </span>
+                      </button>
+                    </form>
 
                   </div>
                 </div>
