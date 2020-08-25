@@ -26,7 +26,7 @@ Theme Store optional settings
         <!-- Products -->
         <div class="content">
           <div class="row no-gutters">
-
+            
             {% for product in collection.products limit: 6 %}
 
               <div class="col-xs-12 col-sm-5 col-md-5 col-lg-5 offset-sm-1 offset-md-1 offset-lg-1"
@@ -56,6 +56,16 @@ Theme Store optional settings
                     </a>
                   </div>
 
+                  <!-- Script to Fix the dimensions' paragraph -->
+                  <script>
+                    $("");
+                    
+                    // 1. Iterate the "Product Title's ID." 
+                    // 2. Modify the <a> element's dimensions with Jquery   https://stackoverflow.com/questions/5095000/jquery-remove-string-from-string
+                    // https://www.tutorialrepublic.com/faq/how-to-find-substring-between-the-two-words-using-jquery.php
+                    // 3. Print those dimensions in the next <a> element with an iterated ID  
+                  </script>
+
                   <!-- Price & Buy Button-->
                   <div class="about" style="margin-top: 25px;">
                     <div class="price" style="float:left;">
@@ -63,7 +73,7 @@ Theme Store optional settings
                         {{ product.price | money }}
                       </h3>
                     </div>
-
+                    
                     <!-- Add to Cart Button + an invisible variant selector -->
                     <form action="/cart/add" method="post" enctype="multipart/form-data">
                       {% unless product.has_only_default_variant %}
