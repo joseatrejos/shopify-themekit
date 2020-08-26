@@ -1,7 +1,7 @@
 <!-- This file has been called in navbar.liquid -->
 <ul class="list-unstyled">
   <template v-if="cart">
-    <li class="media" v-for="(item, index) in cart.items">
+    <li class="media" v-for="(item, index) in cart.items" style="margin-top: 17px;">
       <template v-if="item.image">
         <a :href="item.url">
           <img class="img-fluid mr-4 mb-2" width="150" :src="item.image" alt="">
@@ -48,14 +48,12 @@
 
   </template>
 
-  <li class="text-center">
-      <a href="/cart" class="btn btn-primary" style="margin-top:15px;">
+  <li class="text-center" style="margin-top:10px; margin-bottom:5px;">
+      <a href="/cart" class="btn btn-primary" style="margin-top:10px;">
         Carrito
       </a>
-      
-      <br/><br/>
 
-      <a href="/checkout" class="btn btn-success">
+      <a href="/checkout" class="btn btn-success" style="margin-top: 10px;">
         Comprar
       </a>
   </li>

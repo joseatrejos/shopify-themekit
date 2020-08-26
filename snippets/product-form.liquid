@@ -1,6 +1,6 @@
 {% form 'product', product, data-product-form: '', data-product-handle: product.handle, data-enable-history-state: 'true' %}
 
-  <!-- A Select with the product's variants -->
+  <!-- A (hidden) select with the product's variants -->
   <select name="id" v-model="form.id" id="variant_id" class="form-control" style="display: none;">
     {% for variant in product.variants %}
       <option
@@ -25,19 +25,42 @@
   </select>
 </noscript>
 
-<br/>
-
+<!-- Shopping buttons -->
 <div class="form-group">
     <div class="row align-items-end">
-      <div class="col-md-6" style="margin-top:15px; float: left;">
+
+      <!-- Product quantity input -->
+      <div class="col-md-12" style="margin-top:5px; float: left;">
           <label for="Quantity" class="form-label">{{ 'products.product.quantity' | t }}</label>
-          <input type="number" v-model="form.quantity" class="form-control" id="Quantity" name="quantity" value="1" min="1">
+          <input type="number" v-model="form.quantity" class="form-control" id="Quantity" name="quantity" value="1" min="1"
+          {% unless product.available %}disabled="disabled" {% endunless %} 
+          {% if section_onboarding %}disabled="disabled"{% endif %}>
       </div>
-      <div class="col-md-6">
+      
+      <!-- Buy now button -->
+      <div class="col-md-12" style="margin-top: 15px;">
+
+        <form action="/cart/add" method="post" enctype="multipart/form-data">
+          <button class="btn btn-info btn-block" type="submit" name="add" data-add-to-cart
+            {% unless product.available %}disabled="disabled" {% endunless %} 
+            {% if section_onboarding %}disabled="disabled"{% endif %}>
+            <span data-add-to-cart-text>
+              {% if product.available %}
+                Comprar ahora
+              {% else %}
+                {{ 'products.product.sold_out' | t }}
+              {% endif %}
+            </span>
+          </button>
+        </form>
+      </div>
+
+      <!-- Add to Cart button -->
+      <div class="col-md-12" style="margin-top: 15px;">
           <button
             type="button"
             @click="addToCart"
-            class="btn btn-primary"
+            class="btn btn-primary btn-block"
             name="add"
             data-submit-button
             {% unless current_variant.available %}disabled="disabled"{% endunless %}>
