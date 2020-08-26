@@ -30,7 +30,7 @@
 
     <!-- Favicon -->
     {%- if settings.favicon != blank -%}
-    <link rel="shortcut icon" href="{{ settings.favicon | img_url: '32x32' }}" type="image/png">
+      <link rel="shortcut icon" href="{{ settings.favicon | img_url: '32x32' }}" type="image/png">
     {%- endif -%}
 
     <!-- SEO -->
@@ -61,18 +61,21 @@
     <!-- Shop money Format and Cart -->
     <script>
       document.documentElement.className = document.documentElement.className.replace('no-js', '');
-
+  
       window.theme = {
         strings: {
           addToCart: {{ 'products.product.add_to_cart' | t | json }},
-          soldOut: { { 'products.product.sold_out' | t | json } },
-          unavailable: { { 'products.product.unavailable' | t | json } }
+          soldOut: {{ 'products.product.sold_out' | t | json }},
+          unavailable: {{ 'products.product.unavailable' | t | json }}
         },
-        moneyFormat: { { shop.money_format | json } }
+        moneyFormat: {{ shop.money_format | json }}
       };
     </script>
 
     {{ content_for_header }}
+
+    <!-- Arab guy's CSS -->
+    {{ 'app.css' | asset_url | stylesheet_tag }} -->
   </head>
 
   <body id="{{ page_title | handle }}" class="template-{{ template.name | handle }}">
@@ -83,7 +86,7 @@
     {% section 'header' %}
     
     <!-- Index's Dynamic UI Content, to modify, head to shopify's customization of your store and edit it from the web app -->
-    <main style="margin-top:60px;">
+    <main style="margin-top:30px;">
         <!-- Note to self: you must define a container at the beginning of each section since there is none used here -->
         {{ content_for_layout }}
     </main>
@@ -97,11 +100,10 @@
     <!-- Bootstrap Footer with secure payments' photos -->
     {% section 'unmodifiable-footer' %}
 
+    <!-- Arab guy's JS with the cart functions -->
+    {{ 'app.js' | asset_url | script_tag }}
+
     <!-- Javascript Files -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
-    <script src="{{ 'bs-init.js' | asset_url }}"></script>
     <script src="{{ 'bs-init.js' | asset_url }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.2.0/aos.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.js"></script>

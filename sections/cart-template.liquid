@@ -112,33 +112,30 @@
                               ${ total_price(item) | money }
                             </td>
                           </tr>
-            
                         </template>
-
                   </template>
-
-
                 </tbody>
-      
             </table>
         </div>
-
+        
         <div class="col-md-4">
-          <div class="cart-sidebar">
+          <div class="cart-sidebar" style="margin-top: 12px;">
               {% if settings.cart_notes_enable %}
-                  <label class="form-label" for="CartSpecialInstructions">{{ 'cart.general.note' | t }}</label>
+                  <label class="form-label font-italic" for="CartSpecialInstructions">{{ 'cart.general.note' | t }}</label>
                   <textarea class="form-control" name="note" id="CartSpecialInstructions">{{ cart.note }}</textarea>
               {% endif %}
         
-                <p>{{ 'cart.general.subtotal' | t }}</p>
+                <p style="margin-top:40px" class="font-weight-bold">{{ 'cart.general.subtotal' | t }}</p>
                 <p v-if='cart'>${ cart_total_price | money }</p>
                 {% if cart.total_discounts > 0 %}
                   <p>{{ 'cart.general.savings' | t }} {{ cart.total_discounts | money }}</p>
                 {% endif %}
-                <p>{{ 'cart.general.shipping_at_checkout' | t }}</p>
-                <input type="button" @click="updateCart" name="update" class="btn btn-success" value="{{ 'cart.general.update' | t }}">
-                <input type="submit" name="checkout" class="btn btn-primary" class="button" value="{{ 'cart.general.checkout' | t }}">
-
+                <hr/>
+                <p class="text-justify" style="margin-top: 10px;">{{ 'cart.general.shipping_at_checkout' | t }}.</p>
+                <div class="text-center">
+                  <input type="button" @click="updateCart" name="update" class="btn btn-success" value="{{ 'cart.general.update' | t }}" style="margin-top: 15px;">
+                  <input type="submit" name="checkout" class="btn btn-primary" class="button" value="{{ 'cart.general.checkout' | t }}" style="margin-top: 15px;">
+                </div>
           </div>
         </div>
       </div>

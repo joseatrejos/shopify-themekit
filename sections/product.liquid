@@ -63,24 +63,23 @@
         <div class="col-md-6" style="margin-top: 40px;">
             
             <!-- Title -->
-            <h1>{{ product.title }}</h1>
+            <h1 class="product-names">{{ product.title }}</h1>
            
             <!-- Price Comparison -->
             <div data-price-wrapper class="my-2 text-left" style="padding-top: 10px;">
               
                 <!-- Current Price -->
-                <p data-product-price class="float-left">
+                <p data-product-price style="font-size:22.5px; font-weight: 450;">
                   {{ current_variant.price | money }}
                 </p>
           
                 <!-- Strikethrough Price -->
                 {% if product.compare_at_price_max > product.price %}
-                  <p class="float-right">
-
-                    <!-- Precio habitual -->
-                    <span class="visually-hidden" data-compare-text>{{ 'products.product.regular_price' | t }}</span>
+                  <p class="text-secondary" style="font-weight: 300;">
+                    <!-- Label "Precio habitual" >
+                    <span class="visually-hidden" data-compare-text>{{ 'products.product.regular_price' | t }}</span-->
                     
-                    <!-- Original non-discount price -->
+                    <!-- Original price strikedthrough -->
                     <s data-compare-price>
                       {% if current_variant.compare_at_price > current_variant.price %}
                         {{ current_variant.compare_at_price | money }}
@@ -89,13 +88,22 @@
                   </p>
                 {% endif %}
             </div>
+
+            <!-- Deferred payments' label -->
+            <p class="text-right font-italic" style="color:#1f1f1f;">* Hasta 12 meses sin intereses</p>
              
             <!-- Snippet in case you have product variants -->
             {% include 'product-form' %}
-            
+
             <!-- Description -->
-            <div class="rte" style="padding-top: 10px;">
-              {{ product.description }}
+            <div>
+              <h5 style="margin-top: 35px;">
+                Descripción
+              </h5>
+
+              <div class="rte" style="padding-top: 10px;">
+                {{ product.description }}
+              </div>
             </div>
             
             <br/>
