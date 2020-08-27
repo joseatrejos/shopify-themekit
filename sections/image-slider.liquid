@@ -1,11 +1,4 @@
 <section class="image-slider" style="margin-bottom: 45px;">
-
-  {% if section.settings.title != blank %}
-    <h3 class="h3 text-center">
-      {{section.settings.title}}
-    </h3>
-  {% endif %}
-
   <div class="bd-example">
     <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
       <ol class="carousel-indicators">
@@ -21,7 +14,9 @@
       <div class="carousel-inner">
         {% for block in section.blocks %}
           <div class="carousel-item {% if forloop.first %} active {%endif%}">
-            <img src="{{ block.settings.image | img_url:'master' }}" class="d-block w-100" alt="...">
+            <a href="{{ section.settings.shopping_link }}">
+              <img src="{{ block.settings.image | img_url:'master' }}" class="d-block w-100" alt="...">
+            </a>
             <div class="carousel-caption d-none d-md-block">
               <h5> {{ block.settings.title }} </h5>
 
@@ -29,6 +24,13 @@
           </div>
         {% endfor %}
       </div>
+
+      {% if section.settings.title != blank %}
+        <p class="imageIntroTitle text-center" style="position: absolute; color:white; margin: auto; left: 0; right: 0; top:45%;
+          text-align: center; z-index: 100; font-family: Source-Serif-Pro;">
+          {{section.settings.title}}
+        </p>
+      {% endif %}
 
       <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -58,6 +60,11 @@
         "id": "title",
         "label": "Heading",
         "default": "Slider title"
+      },
+      {
+        "type": "url",
+        "id": "shopping_link",
+        "label": "URL"
       }
     ],
 
