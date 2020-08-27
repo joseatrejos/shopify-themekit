@@ -43,28 +43,18 @@ Theme Store optional settings
 
                   <!-- Product Title -->
                   <div class="product-name text-center" style="color: rgb(0,0,0);" class="anone">
-                    <a href="{{ product.url | within: collection }}" class="anone text-primary">
+                    <a href="{{ product.url | within: collection }}" class="anone text-primary" id="productTitle{{ forloop.index }}">
                       {{ product.title | escape }}
                     </a>
                   </div>
 
                   <!-- Product Dimensions -->
                   <div class="product-name text-center">
-                    <a href="{{ product.url | within: collection }}" style="color: rgb(143, 140, 140); font-size: 14px;"
-                      class="anone">
-                      2.95m x 1.70m x 61cm
+                    <a href="{{ product.url | within: collection }}" style="color: rgb(143, 140, 140); font-size: 14px;" class="anone"
+                    id="productSize{{ forloop.index }}">
+                      
                     </a>
                   </div>
-
-                  <!-- Script to Fix the dimensions' paragraph -->
-                  <script>
-                    $("");
-                    
-                    // 1. Iterate the "Product Title's ID." 
-                    // 2. Modify the <a> element's dimensions with Jquery   https://stackoverflow.com/questions/5095000/jquery-remove-string-from-string
-                    // https://www.tutorialrepublic.com/faq/how-to-find-substring-between-the-two-words-using-jquery.php
-                    // 3. Print those dimensions in the next <a> element with an iterated ID  
-                  </script>
 
                   <!-- Price & Buy Button-->
                   <div class="about" style="margin-top: 25px;">
@@ -132,6 +122,34 @@ Theme Store optional settings
               </div>
 
             {% endfor %}
+
+            <!-- Script to Fix the dimensions' paragraph -->
+            <script>
+              //for each(var item in obj) {
+
+                // Product's full name
+                var productStr = document.getElementById("productTitle1").textContent;
+
+                // Word that will split the product's full name string
+                var separator = "Bestway"
+
+                // Text separation into an array (you split the string after the word Bestway)
+                var productSeparated = productStr.split(separator)
+
+                document.getElementById("productTitle1").innerHTML = productSeparated[0];
+                document.getElementById("productSize1").innerHTML = productSeparated[1];
+
+              //}
+              
+                // Product's full name
+                productStr = document.getElementById("productTitle2").textContent;
+
+                // Text separation into an array (you split the string after the word Bestway)
+                productSeparated = productStr.split(separator)
+
+                document.getElementById("productTitle2").innerHTML = productSeparated[0];
+                document.getElementById("productSize2").innerHTML = productSeparated[1];
+            </script>
 
           </div>
         </div>
