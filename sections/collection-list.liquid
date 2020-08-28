@@ -21,9 +21,9 @@
           
           {% if collection.image != blank or collection.products.first != blank %}
 
-            <div class="image">
+            <div class="image d-flex align-items-center justify-content-center" style="height:225px; ">
               <a href="{{ collection.url | default: "#" }}">
-                <img class="img-fluid d-block mx-auto" src="{{ collection.products.first.featured_image | img_url: '1160x' }}" alt="{{ product.featured_image.alt | escape }}">
+                <img class="img-fluid d-block mx-auto" style="max-height: 225px; width:auto;" src="{{ collection.products.first.featured_image | img_url: '1160x' }}" alt="{{ product.featured_image.alt | escape }}">
               </a>
             </div>
             
@@ -34,7 +34,7 @@
           
           <!-- Collection Title -->
           <div class="product-name text-center" style="color: rgb(0,0,0); margin-top: 25px;" class="anone">
-            <a href="{{ collection.url | default: "#" }}" class="anone text-primary">
+            <a href="{{ collection.url | default: "#" }}" class="anone text-primary product-names2">
               {{ collection.title | default: default_label }}
             </a>
           </div>
