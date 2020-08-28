@@ -38,23 +38,23 @@
         <!-- Sidebar List -->
         <ul class="list-group list-group-flush">
           {%- for listed_collection in collections -%}
-          {% if listed_collection.title == collection.title%}
+            {% if listed_collection.title == collection.title%}
 
-          <a href="{{ listed_collection.url }}" class="anone text-white">
-            <li class="list-group-item bg-primary">
-              {{ listed_collection.title }}
-            </li>
-          </a>
+              <a href="{{ listed_collection.url }}" class="anone text-white">
+                <li class="list-group-item bg-primary">
+                  {{ listed_collection.title }}
+                </li>
+              </a>
 
-          {% else %}
+              {% else %}
 
-          <a href="{{ listed_collection.url }}" class="anone text-primary">
-            <li class="list-group-item">
-              {{ listed_collection.title }}
-            </li>
-          </a>
+              <a href="{{ listed_collection.url }}" class="anone text-primary">
+                <li class="list-group-item">
+                  {{ listed_collection.title }}
+                </li>
+              </a>
 
-          {% endif %}
+            {% endif %}
           {% endfor %}
         </ul>
       </div>
@@ -92,14 +92,16 @@
       <div class="row">
 
         {% for product in collection.products %}
-        <div class="col-md-6 col-lg-4" style="margin-bottom:60px">
+        <div class="col-md-6 col-lg-4 h-100" style="margin-bottom:60px">
 
           <!-- Product Image -->
           {% if product.featured_image != blank %}
-          <a href="{{ product.url | within: collection }}">
-            <img class="img-fluid d-block mx-auto" src="{{ product.featured_image | img_url: '1160x' }}" alt="{{ product.featured_image.alt | escape }} 
-            data-src="{{ product.featured_image | img_url:'500x500', crop:'center' }}" alt="{{ product.featured_image.alt }}" class="img-fluid lazyload d-block mx-auto" style="margin-bottom:30px">
-          </a>
+            <div style="height:225px;" class="d-flex align-items-center">
+              <a href="{{ product.url | within: collection }}">
+                <img class="img-fluid lazyload d-block mx-auto" src="{{ product.featured_image | img_url: '1160x' }}" alt="{{ product.featured_image.alt | escape }} 
+                data-src="{{ product.featured_image | img_url:'500x500', crop:'center' }}" alt="{{ product.featured_image.alt }}" style="margin-bottom:30px; max-height: 225px;">
+              </a>
+            </div>
           {% endif %}
 
           <!-- Product name with link -->
