@@ -2,3 +2,13 @@ theme new --password=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 --store=poolmx.mysho
 
 REMEMBER TO RUN:
 theme watch
+
+
+-------------------------------------------------------------------------------
+1. To configure an existing theme, first you must get the theme's ID number with: 
+
+theme get --list -p=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 -s=poolmx.myshopify.com
+
+2. Now run this line while changing the -t parameter to the ID of the store that you wish to work with>
+
+theme get -p=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 -s=poolmx.myshopify.com -t=109632192664
